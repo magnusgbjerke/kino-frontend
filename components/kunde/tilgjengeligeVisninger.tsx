@@ -28,7 +28,6 @@ export function TilgjengeligeVisninger() {
 
         if (response.ok) {
           const data: Visning[] = await response.json();
-          console.log(data);
           setVisninger(data);
         } else {
           const errorData: ErrorResponse = await response.json();

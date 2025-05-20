@@ -15,7 +15,6 @@ export default function Home() {
   useEffect(() => {
     if (session?.accessToken) {
       const roles = getRolesFromToken(session.accessToken);
-      console.log("Extracted roles:", roles);
 
       if (roles?.includes("ADMIN")) {
         setRole("ADMIN");
