@@ -5,6 +5,7 @@ import { Input } from "../Input";
 import { Button } from "../Button";
 import { components } from "@/lib/schema";
 import { getPath } from "@/lib/dataAdmin";
+import { useSession } from "next-auth/react";
 
 export type Film = components["schemas"]["Film"];
 export type LocalTime = components["schemas"]["LocalTime"];
@@ -14,10 +15,10 @@ export type Visning = components["schemas"]["Visning"];
 
 export function RegistrereFilm() {
   const [input, setInput] = useState("");
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
   };
+  const { data: session } = useSession();
 
   const sendToAPI = async () => {
     if (!input) {
@@ -25,41 +26,48 @@ export function RegistrereFilm() {
       return;
     }
 
-    const user: Film = {
-      filmnavn: input,
-    };
+    if (!session?.accessToken) {
+      console.error("No access token. User might not be logged in.");
+      return;
+    }
+
+    const user: Film = { filmnavn: input };
 
     try {
-      console.log("Sending to API:", user);
-
       const response = await fetch(getPath("/api/administrasjon/film"), {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.accessToken}`,
+        },
         body: JSON.stringify(user),
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`API error ${response.status}: ${errorText}`);
+      if (response.ok) {
+        alert("Film lagt til");
+      } else {
+        const text = await response.text();
+        console.error("API error:", text);
       }
     } catch (error) {
       console.error("Failed to send to API:", error?.message || error);
     }
   };
-
   return (
-    <div>
-      <h1>Registrer film</h1>
+    <div className="p-4">
+      <h1 className="text-4xl font-bold mb-6">Registrer film</h1>
       <Input
         size="md"
         value={input}
         onChange={handleInputChange}
         className="ml-1 mr-1"
-        placeholder="Enter phonenumber"
+        placeholder=""
       />
-      <Button size="sm" onClick={sendToAPI}>
-        Send to API
-      </Button>
+      <div className="pt-4">
+        <Button size="sm" onClick={sendToAPI}>
+          Registrer
+        </Button>
+      </div>
     </div>
   );
 }
