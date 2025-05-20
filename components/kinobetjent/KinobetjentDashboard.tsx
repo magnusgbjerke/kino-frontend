@@ -14,8 +14,8 @@ export function KinobetjentDashboard() {
       <div className="flex justify-evenly container mx-auto">
         <div>
           {" "}
-          <RegistrereBillett />
           <RegistrereBetaling />
+          <RegistrereBillett />
         </div>
         <div>
           <p>Logget inn som {session?.user?.email}</p>
