@@ -12,6 +12,7 @@ export type LocalTime = components["schemas"]["LocalTime"];
 export type RegistrereBillett = components["schemas"]["RegistrereBillett"];
 export type RegistrerePlasser = components["schemas"]["RegistrerePlasser"];
 export type Visning = components["schemas"]["Visning"];
+export type ErrorResponse = components["schemas"]["ErrorResponse"];
 
 export function RegistrereFilm() {
   const [input, setInput] = useState("");
@@ -46,8 +47,8 @@ export function RegistrereFilm() {
       if (response.ok) {
         alert("Film lagt til");
       } else {
-        const text = await response.text();
-        console.error("API error:", text);
+        const errorData: ErrorResponse = await response.json();
+        alert(errorData.message);
       }
     } catch (error) {
       console.error("Failed to send to API:", error?.message || error);

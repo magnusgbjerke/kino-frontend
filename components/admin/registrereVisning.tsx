@@ -8,6 +8,7 @@ import { getPath } from "@/lib/dataAdmin";
 import { useSession } from "next-auth/react";
 
 export type Visning = components["schemas"]["Visning"];
+export type ErrorResponse = components["schemas"]["ErrorResponse"];
 
 export function RegistrereVisning() {
   const [dato, setDato] = useState("2024-02-02");
@@ -46,8 +47,8 @@ export function RegistrereVisning() {
       if (response.ok) {
         alert("Visning registrert");
       } else {
-        const text = await response.text();
-        console.error("API error:", text);
+        const errorData: ErrorResponse = await response.json();
+        alert(errorData.message);
       }
     } catch (error) {
       console.error("Failed to send to API:", error?.message || error);

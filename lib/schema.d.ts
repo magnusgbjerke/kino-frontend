@@ -21,7 +21,7 @@ export interface paths {
      * Registrere visning
      * @description Registrere visning.
      */
-    post: operations["oppretteVisning"];
+    post: operations["registrereVisning"];
     delete?: never;
     options?: never;
     head?: never;
@@ -119,7 +119,7 @@ export interface paths {
      * Tilgjengjelige visninger
      * @description Kunden får vist tilgjengelige visninger(der det er minst 30 minutter igjen til start)
      */
-    get: operations["getTilgjengeligeVisninger"];
+    get: operations["hentTilgjengeligeVisninger"];
     put?: never;
     post?: never;
     delete?: never;
@@ -172,11 +172,32 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
-    Film: {
-      /** @example Echoes of Tomorrow */
-      filmnavn: string;
+    Billett: {
+      billettkode?: string;
+      visning?: components["schemas"]["Visning"];
+      erBetalt?: boolean;
     };
-    /** @example 16:00:00 */
+    ErrorResponse: {
+      /** Format: int32 */
+      status?: number;
+      message?: string;
+      path?: string;
+      /** Format: date-time */
+      timestamp?: string;
+      link?: string;
+    };
+    Film: {
+      /** Format: int64 */
+      filmnr?: number;
+      /** @example Echoes of Tomorrow */
+      filmnavn?: string;
+    };
+    Kinosal: {
+      /** Format: int32 */
+      kinosalnr?: number;
+      kinonavn?: string;
+      kinosalnavn?: string;
+    };
     LocalTime: {
       /** Format: int32 */
       hour?: number;
@@ -199,29 +220,14 @@ export interface components {
       setenr?: number;
     };
     Visning: {
-      /**
-       * Format: int32
-       * @example 1
-       */
-      visningnr: number;
-      /**
-       * Format: int32
-       * @example 1
-       */
-      filmnr: number;
-      /**
-       * Format: int32
-       * @example 201
-       */
-      kinosalnr: number;
-      /**
-       * Format: date
-       * @example 2024-02-02
-       */
-      dato: string;
-      starttid: components["schemas"]["LocalTime"];
-      /** @example 100 */
-      pris: number;
+      /** Format: int32 */
+      visningnr?: number;
+      film?: components["schemas"]["Film"];
+      kinosal?: components["schemas"]["Kinosal"];
+      /** Format: date */
+      dato?: string;
+      starttid?: components["schemas"]["LocalTime"];
+      pris?: number;
     };
   };
   responses: never;
@@ -250,13 +256,11 @@ export interface operations {
         headers: {
           [name: string]: unknown;
         };
-        content: {
-          "application/json": components["schemas"]["Visning"];
-        };
+        content?: never;
       };
     };
   };
-  oppretteVisning: {
+  registrereVisning: {
     parameters: {
       query?: never;
       header?: never;
@@ -274,9 +278,7 @@ export interface operations {
         headers: {
           [name: string]: unknown;
         };
-        content: {
-          "application/json": components["schemas"]["Visning"];
-        };
+        content?: never;
       };
     };
   };
@@ -299,7 +301,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": components["schemas"]["RegistrereBillett"];
+          "application/json": components["schemas"]["Billett"];
         };
       };
     };
@@ -323,7 +325,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": components["schemas"]["RegistrereBillett"];
+          "application/json": components["schemas"]["Billett"];
         };
       };
     };
@@ -366,13 +368,20 @@ export interface operations {
         headers: {
           [name: string]: unknown;
         };
+        content?: never;
+      };
+      /** @description Bad request */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
         content: {
-          "application/json": components["schemas"]["Film"];
+          "application/json": components["schemas"]["ErrorResponse"];
         };
       };
     };
   };
-  getTilgjengeligeVisninger: {
+  hentTilgjengeligeVisninger: {
     parameters: {
       query?: never;
       header?: never;
@@ -387,7 +396,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": components["schemas"]["Visning"];
+          "application/json": components["schemas"]["Visning"][];
         };
       };
     };

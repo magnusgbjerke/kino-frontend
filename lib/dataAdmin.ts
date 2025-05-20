@@ -9,6 +9,8 @@ export type LocalTime = components["schemas"]["LocalTime"];
 export type RegistrereBillett = components["schemas"]["RegistrereBillett"];
 export type RegistrerePlasser = components["schemas"]["RegistrerePlasser"];
 export type Visning = components["schemas"]["Visning"];
+export type Billett = components["schemas"]["Billett"];
+export type ErrorResponse = components["schemas"]["ErrorResponse"];
 
 //Fetches
 export async function getFilm(): Promise<Film[]> {
