@@ -1,14 +1,14 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-export function UserDashboard() {
+export function KinobetjentDashboard() {
   const { data: session } = useSession();
 
   return (
     <div className="flex justify-evenly container mx-auto">
       <div>dd</div>
       <div>
-        <h1>UserDashboard</h1> <br />
+        <h1>KinobetjentDashboard</h1> <br />
         <p>Signed in as {session?.user?.name}</p>
         <button
           onClick={async () => {

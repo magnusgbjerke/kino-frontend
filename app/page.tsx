@@ -5,8 +5,8 @@ import { useSession } from "next-auth/react";
 import { getRolesFromToken } from "@/lib/getRoleFromToken";
 import { useGlobalStore } from "@/stores/global-store";
 import { AdminDashboard } from "@/components/AdminDashboard";
-import { UserDashboard } from "@/components/UserDashboard";
 import { Kunde } from "@/components/kunde";
+import { KinobetjentDashboard } from "@/components/KinobetjentDashboard";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -19,8 +19,8 @@ export default function Home() {
 
       if (roles?.includes("ADMIN")) {
         setRole("ADMIN");
-      } else if (roles?.includes("USER")) {
-        setRole("USER");
+      } else if (roles?.includes("KINOBETJENT")) {
+        setRole("KINOBETJENT");
       }
     }
   }, [session?.accessToken]);
@@ -40,7 +40,7 @@ export default function Home() {
       ) : (
         <div>
           {role === "ADMIN" && <AdminDashboard />}
-          {role === "USER" && <UserDashboard />}
+          {role === "KINOBETJENT" && <KinobetjentDashboard />}
         </div>
       )}
     </div>
