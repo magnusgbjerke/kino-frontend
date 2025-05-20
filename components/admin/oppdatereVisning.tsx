@@ -45,7 +45,7 @@ export function OppdatereVisning() {
       });
 
       if (response.ok) {
-        alert("Visning oppdatert");
+        alert(`Visning ${visningnr} er oppdatert`);
       } else {
         const errorData: ErrorResponse = await response.json();
         alert(errorData.message);

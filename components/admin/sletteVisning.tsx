@@ -14,7 +14,7 @@ export type RegistrerePlasser = components["schemas"]["RegistrerePlasser"];
 export type Visning = components["schemas"]["Visning"];
 export type ErrorResponse = components["schemas"]["ErrorResponse"];
 
-export function RegistrereFilm() {
+export function SletteVisning() {
   const [input, setInput] = useState("");
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
@@ -32,20 +32,22 @@ export function RegistrereFilm() {
       return;
     }
 
-    const user: Film = { filmnavn: input };
-
     try {
-      const response = await fetch(getPath("/api/administrasjon/film"), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session.accessToken}`,
+      const response = await fetch(
+        `
+    ${getPath("/api/administrasjon/visning")}/${input}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.accessToken}`,
+          },
         },
-        body: JSON.stringify(user),
-      });
+      );
 
       if (response.ok) {
-        alert(`Film ${input} lagt til`);
+        alert(`Visning ${input} er slettet`);
+        setInput("");
       } else {
         const errorData: ErrorResponse = await response.json();
         alert(errorData.message);
@@ -56,17 +58,22 @@ export function RegistrereFilm() {
   };
   return (
     <div className="p-4">
-      <h1 className="text-4xl font-bold mb-6">Registrer film</h1>
-      <Input
-        size="md"
-        value={input}
-        onChange={handleInputChange}
-        className="ml-1 mr-1"
-        placeholder=""
-      />
+      <h1 className="text-4xl font-bold mb-6">Slette visning</h1>
+
+      <div>
+        <label className="block mb-1 font-medium">Visningsnummer</label>
+        <Input
+          size="md"
+          value={input}
+          onChange={handleInputChange}
+          className="ml-1 mr-1"
+          placeholder=""
+        />
+      </div>
+
       <div className="pt-4">
         <Button size="sm" onClick={sendToAPI}>
-          Registrer
+          Slett
         </Button>
       </div>
     </div>

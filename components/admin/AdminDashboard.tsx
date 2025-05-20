@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { RegistrereFilm } from "@/components/admin/registrereFilm";
 import { OppdatereVisning } from "./oppdatereVisning";
 import { RegistrereVisning } from "./registrereVisning";
+import { SletteVisning } from "./sletteVisning";
 export function AdminDashboard() {
   const { data: session } = useSession();
 
@@ -16,6 +17,7 @@ export function AdminDashboard() {
           <RegistrereFilm />
           <OppdatereVisning />
           <RegistrereVisning />
+          <SletteVisning />
         </div>
 
         <div>

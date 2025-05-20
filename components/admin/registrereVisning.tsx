@@ -45,7 +45,7 @@ export function RegistrereVisning() {
       });
 
       if (response.ok) {
-        alert("Visning registrert");
+        alert(`Visning ${visningnr} er registrert`);
       } else {
         const errorData: ErrorResponse = await response.json();
         alert(errorData.message);
