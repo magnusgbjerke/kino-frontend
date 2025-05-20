@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { RegistrereBillett } from "./registrereBillett";
 import { RegistrereBetaling } from "./registrereBetaling";
+import { SletteUbetalteBestillinger } from "./sletteUbetalteBestillinger";
 export function KinobetjentDashboard() {
   const { data: session } = useSession();
 
@@ -16,6 +17,7 @@ export function KinobetjentDashboard() {
           {" "}
           <RegistrereBetaling />
           <RegistrereBillett />
+          <SletteUbetalteBestillinger />
         </div>
         <div>
           <p>Logget inn som {session?.user?.email}</p>
