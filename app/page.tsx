@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { getRolesFromToken } from "@/lib/getRoleFromToken";
 import { useGlobalStore } from "@/stores/global-store";
-import { AdminDashboard } from "@/components/AdminDashboard";
-import { Kunde } from "@/components/kunde";
-import { KinobetjentDashboard } from "@/components/KinobetjentDashboard";
+import { AdminDashboard } from "@/components/admin/AdminDashboard";
+import { Kunde } from "@/components/kunde/kunde";
+import { KinobetjentDashboard } from "@/components/kinobetjent/KinobetjentDashboard";
 
 export default function Home() {
   const { data: session, status } = useSession();
