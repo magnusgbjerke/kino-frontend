@@ -39,7 +39,7 @@ export interface paths {
     put?: never;
     /**
      * Bestille billett
-     * @description Velge plasser og mottar en unik billettkode ved bekreftelse.
+     * @description Velg plasser og motta en unik billettkode ved bekreftelse.
      */
     post: operations["bestilleBillett"];
     delete?: never;
@@ -187,17 +187,12 @@ export interface components {
       link?: string;
     };
     Film: {
-      /** Format: int64 */
+      /** Format: int32 */
       filmnr?: number;
       /** @example Echoes of Tomorrow */
       filmnavn?: string;
     };
-    Kinosal: {
-      /** Format: int32 */
-      kinosalnr?: number;
-      kinonavn?: string;
-      kinosalnavn?: string;
-    };
+    /** @example 16:00:00 */
     LocalTime: {
       /** Format: int32 */
       hour?: number;
@@ -220,14 +215,29 @@ export interface components {
       setenr?: number;
     };
     Visning: {
-      /** Format: int32 */
-      visningnr?: number;
-      film?: components["schemas"]["Film"];
-      kinosal?: components["schemas"]["Kinosal"];
-      /** Format: date */
-      dato?: string;
-      starttid?: components["schemas"]["LocalTime"];
-      pris?: number;
+      /**
+       * Format: int32
+       * @example 1
+       */
+      visningnr: number;
+      /**
+       * Format: int32
+       * @example 1
+       */
+      filmnr: number;
+      /**
+       * Format: int32
+       * @example 201
+       */
+      kinosalnr: number;
+      /**
+       * Format: date
+       * @example 2024-02-02
+       */
+      dato: string;
+      starttid: components["schemas"]["LocalTime"];
+      /** @example 100 */
+      pris: number;
     };
   };
   responses: never;
