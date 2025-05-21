@@ -34,7 +34,7 @@ export function RegistrereFilm() {
       return;
     }
 
-    const user: Film = { filmnavn: input };
+    const user: FilmRequest = { filmnavn: input };
 
     try {
       const response = await fetch(getPath("/api/administrasjon/film"), {
