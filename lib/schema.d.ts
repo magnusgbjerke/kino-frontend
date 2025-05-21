@@ -128,6 +128,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/kunde/plass/{visningnr}": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Ledige plasser
+     * @description Kunden får vist ledige plasser ved en gitt visning
+     */
+    get: operations["hentLedigePlasser"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/kinobetjent/billett/{visningnr}": {
     parameters: {
       query?: never;
@@ -215,16 +235,32 @@ export interface components {
       /** Format: int32 */
       nano?: number;
     };
-    Plass: {
+    PlassRequest: {
+      /**
+       * Format: int32
+       * @example 3
+       */
+      radnr?: number;
+      /**
+       * Format: int32
+       * @example 7
+       */
+      setenr?: number;
+    };
+    PlassResponse: {
       /** Format: int32 */
       radnr?: number;
       /** Format: int32 */
       setenr?: number;
+      kinosal?: components["schemas"]["Kinosal"];
     };
     RegistrereBillett: {
-      /** Format: int32 */
+      /**
+       * Format: int32
+       * @example 1
+       */
       visningnr?: number;
-      registrerePlasser?: components["schemas"]["Plass"][];
+      registrerePlasser?: components["schemas"]["PlassRequest"][];
     };
     VisningRequest: {
       /**
@@ -429,6 +465,28 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["VisningResponse"][];
+        };
+      };
+    };
+  };
+  hentLedigePlasser: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        visningnr: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description successful operation */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["PlassResponse"][];
         };
       };
     };
