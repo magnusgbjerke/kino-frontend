@@ -78,7 +78,7 @@ export function BestilleBillett() {
   };
 
   return (
-    <div className="p-4 max-w-lg mx-auto space-y-6">
+    <div className="p-4">
       <h1 className="text-4xl font-bold mb-6">Bestill Billett</h1>
       <SelectMenu />
       <div>

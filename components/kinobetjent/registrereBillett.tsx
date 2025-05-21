@@ -83,7 +83,7 @@ export function RegistrereBillett() {
   };
 
   return (
-    <div className="p-4 max-w-lg mx-auto space-y-6">
+    <div className="p-4">
       <h1 className="text-4xl font-bold mb-6">Registrer Billett</h1>
 
       <div>
@@ -140,7 +140,7 @@ export function RegistrereBillett() {
         </Button>
       </div>
 
-      <p>Generert billett: {apiResponse}</p>
+      <p className="pt-4">Generert billett: {apiResponse}</p>
     </div>
   );
 }
