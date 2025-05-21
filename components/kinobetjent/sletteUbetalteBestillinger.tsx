@@ -7,11 +7,13 @@ import { components } from "@/lib/schema";
 import { getPath } from "@/lib/dataAdmin";
 import { useSession } from "next-auth/react";
 
-export type Film = components["schemas"]["Film"];
+export type FilmRequest = components["schemas"]["FilmRequest"];
+export type FilmResponse = components["schemas"]["FilmResponse"];
 export type LocalTime = components["schemas"]["LocalTime"];
 export type RegistrereBillett = components["schemas"]["RegistrereBillett"];
-export type RegistrerePlasser = components["schemas"]["RegistrerePlasser"];
+export type RegistrerePlasser = components["schemas"]["Plass"];
 export type Visning = components["schemas"]["Visning"];
+export type Billett = components["schemas"]["Billett"];
 export type ErrorResponse = components["schemas"]["ErrorResponse"];
 
 export function SletteUbetalteBestillinger() {

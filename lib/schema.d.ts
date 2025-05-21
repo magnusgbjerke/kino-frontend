@@ -128,6 +128,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  "/api/kunde/film": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * Tilgjengjelige filmer
+     * @description Viser alle filmer som går på kino for øyeblikket
+     */
+    get: operations["hentTilgjengeligeFilmer"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   "/api/kinobetjent/billett/{visningnr}": {
     parameters: {
       query?: never;
@@ -186,8 +206,15 @@ export interface components {
       timestamp?: string;
       link?: string;
     };
-    Film: {
-      /** Format: int32 */
+    FilmRequest: {
+      /** @example Echoes of Tomorrow */
+      filmnavn: string;
+    };
+    FilmResponse: {
+      /**
+       * Format: int32
+       * @example 1
+       */
       filmnr?: number;
       /** @example Echoes of Tomorrow */
       filmnavn?: string;
@@ -203,16 +230,16 @@ export interface components {
       /** Format: int32 */
       nano?: number;
     };
-    RegistrereBillett: {
-      /** Format: int32 */
-      visningnr?: number;
-      registrerePlasser?: components["schemas"]["RegistrerePlasser"][];
-    };
-    RegistrerePlasser: {
+    Plass: {
       /** Format: int32 */
       radnr?: number;
       /** Format: int32 */
       setenr?: number;
+    };
+    RegistrereBillett: {
+      /** Format: int32 */
+      visningnr?: number;
+      registrerePlasser?: components["schemas"]["Plass"][];
     };
     Visning: {
       /**
@@ -369,7 +396,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["Film"];
+        "application/json": components["schemas"]["FilmRequest"];
       };
     };
     responses: {
@@ -407,6 +434,26 @@ export interface operations {
         };
         content: {
           "application/json": components["schemas"]["Visning"][];
+        };
+      };
+    };
+  };
+  hentTilgjengeligeFilmer: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description successful operation */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["FilmResponse"][];
         };
       };
     };
