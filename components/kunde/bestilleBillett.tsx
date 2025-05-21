@@ -5,7 +5,8 @@ import { Input } from "../Input";
 import { Button } from "../Button";
 import { components } from "@/lib/schema";
 import { getPath } from "@/lib/dataAdmin";
-import { useSession } from "next-auth/react";
+import SelectMenu from "./selectMenu";
+import { useKundeStore } from "./kunde-store";
 
 export type FilmRequest = components["schemas"]["FilmRequest"];
 export type FilmResponse = components["schemas"]["FilmResponse"];
@@ -18,12 +19,11 @@ export type Billett = components["schemas"]["Billett"];
 export type ErrorResponse = components["schemas"]["ErrorResponse"];
 
 export function BestilleBillett() {
-  const [visningnr, setVisningnr] = useState(0);
   const [registrerePlasser, setRegistrerePlasser] = useState<
     { radnr: number; setenr: number }[]
   >([{ radnr: 0, setenr: 0 }]);
   const [apiResponse, setApiResponse] = useState<string | null>(null);
-  const { data: session } = useSession();
+  const { visningnr } = useKundeStore();
 
   const handlePlassChange = (
     index: number,
@@ -46,13 +46,8 @@ export function BestilleBillett() {
   };
 
   const sendToAPI = async () => {
-    if (!session?.accessToken) {
-      console.error("No access token. User might not be logged in.");
-      return;
-    }
-
     const payload: RegistrereBillett = {
-      visningnr: visningnr,
+      visningnr: Number(visningnr),
       registrerePlasser: registrerePlasser.map(({ radnr, setenr }) => ({
         radnr: radnr,
         setenr: setenr,
@@ -60,11 +55,11 @@ export function BestilleBillett() {
     };
 
     try {
+      console.log(JSON.stringify(payload));
       const response = await fetch(getPath("/api/kinobetjent/billett"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${session.accessToken}`,
         },
         body: JSON.stringify(payload),
       });
@@ -85,15 +80,7 @@ export function BestilleBillett() {
   return (
     <div className="p-4 max-w-lg mx-auto space-y-6">
       <h1 className="text-4xl font-bold mb-6">Bestill Billett</h1>
-
-      <div>
-        <label className="block mb-1 font-medium">Visningnummer</label>
-        <Input
-          value={String(visningnr)}
-          onChange={(e) => setVisningnr(Number(e.target.value))}
-        />
-      </div>
-
+      <SelectMenu />
       <div>
         <label className="block mb-2 font-semibold">Registrere Plasser</label>
         {registrerePlasser.map((plass, index) => (
