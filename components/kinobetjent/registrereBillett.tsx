@@ -95,7 +95,7 @@ export function RegistrereBillett() {
       </div>
 
       <div>
-        <label className="block mb-2 font-semibold">Registrere Plasser</label>
+        <label className="block mb-2">Plasser</label>
         {registrerePlasser.map((plass, index) => (
           <div key={index} className="flex items-center space-x-4 mb-3">
             <div className="flex-1">
@@ -136,11 +136,11 @@ export function RegistrereBillett() {
 
       <div className="pt-4">
         <Button size="sm" onClick={sendToAPI}>
-          Registrer plasser
+          Registrer billett
         </Button>
       </div>
 
-      <p className="pt-4">Generert billett: {apiResponse}</p>
+      <p className="pt-4 font-semibold">Generert billett: {apiResponse}</p>
     </div>
   );
 }
