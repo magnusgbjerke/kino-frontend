@@ -7,7 +7,14 @@ import { components } from "@/lib/schema";
 import { getPath } from "@/lib/dataAdmin";
 import { useSession } from "next-auth/react";
 
-export type Visning = components["schemas"]["Visning"];
+export type FilmRequest = components["schemas"]["FilmRequest"];
+export type FilmResponse = components["schemas"]["FilmResponse"];
+export type LocalTime = components["schemas"]["LocalTime"];
+export type RegistrereBillett = components["schemas"]["RegistrereBillett"];
+export type RegistrerePlasser = components["schemas"]["Plass"];
+export type VisningRequest = components["schemas"]["VisningRequest"];
+export type VisningResponse = components["schemas"]["VisningResponse"];
+export type Billett = components["schemas"]["Billett"];
 export type ErrorResponse = components["schemas"]["ErrorResponse"];
 
 export function OppdatereVisning() {
@@ -25,7 +32,7 @@ export function OppdatereVisning() {
       return;
     }
 
-    const visning: Visning = {
+    const visning: VisningRequest = {
       dato,
       filmnr,
       kinosalnr,

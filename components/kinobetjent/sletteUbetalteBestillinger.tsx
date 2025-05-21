@@ -12,7 +12,8 @@ export type FilmResponse = components["schemas"]["FilmResponse"];
 export type LocalTime = components["schemas"]["LocalTime"];
 export type RegistrereBillett = components["schemas"]["RegistrereBillett"];
 export type RegistrerePlasser = components["schemas"]["Plass"];
-export type Visning = components["schemas"]["Visning"];
+export type VisningRequest = components["schemas"]["VisningRequest"];
+export type VisningResponse = components["schemas"]["VisningResponse"];
 export type Billett = components["schemas"]["Billett"];
 export type ErrorResponse = components["schemas"]["ErrorResponse"];
 

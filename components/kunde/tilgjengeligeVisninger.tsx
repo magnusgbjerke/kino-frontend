@@ -10,12 +10,13 @@ export type FilmResponse = components["schemas"]["FilmResponse"];
 export type LocalTime = components["schemas"]["LocalTime"];
 export type RegistrereBillett = components["schemas"]["RegistrereBillett"];
 export type RegistrerePlasser = components["schemas"]["Plass"];
-export type Visning = components["schemas"]["Visning"];
+export type VisningRequest = components["schemas"]["VisningRequest"];
+export type VisningResponse = components["schemas"]["VisningResponse"];
 export type Billett = components["schemas"]["Billett"];
 export type ErrorResponse = components["schemas"]["ErrorResponse"];
 
 export function TilgjengeligeVisninger() {
-  const [visninger, setVisninger] = useState<Visning[] | null>(null);
+  const [visninger, setVisninger] = useState<VisningResponse[] | null>(null);
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export function TilgjengeligeVisninger() {
         });
 
         if (response.ok) {
-          const data: Visning[] = await response.json();
+          const data: VisningResponse[] = await response.json();
           setVisninger(data);
         } else {
           const errorData: ErrorResponse = await response.json();
@@ -70,8 +71,8 @@ export function TilgjengeligeVisninger() {
             {visninger.map((visning) => (
               <tr key={visning.visningnr} className="text-center">
                 <td className="p-2 border">{visning.visningnr}</td>
-                <td className="p-2 border">{visning.filmnr}</td>
-                <td className="p-2 border">{visning.kinosalnr}</td>
+                <td className="p-2 border">{visning.film?.filmnavn}</td>
+                <td className="p-2 border">{visning.kinosal?.kinonavn}</td>
                 <td className="p-2 border">{visning.dato}</td>
                 <td className="p-2 border">{visning.starttid}</td>
                 <td className="p-2 border">{visning.pris} kr</td>

@@ -128,26 +128,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  "/api/kunde/film": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Tilgjengjelige filmer
-     * @description Viser alle filmer som går på kino for øyeblikket
-     */
-    get: operations["hentTilgjengeligeFilmer"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   "/api/kinobetjent/billett/{visningnr}": {
     parameters: {
       query?: never;
@@ -194,7 +174,7 @@ export interface components {
   schemas: {
     Billett: {
       billettkode?: string;
-      visning?: components["schemas"]["Visning"];
+      visning?: components["schemas"]["VisningResponse"];
       erBetalt?: boolean;
     };
     ErrorResponse: {
@@ -219,7 +199,12 @@ export interface components {
       /** @example Echoes of Tomorrow */
       filmnavn?: string;
     };
-    /** @example 16:00:00 */
+    Kinosal: {
+      /** Format: int32 */
+      kinosalnr?: number;
+      kinonavn?: string;
+      kinosalnavn?: string;
+    };
     LocalTime: {
       /** Format: int32 */
       hour?: number;
@@ -241,7 +226,7 @@ export interface components {
       visningnr?: number;
       registrerePlasser?: components["schemas"]["Plass"][];
     };
-    Visning: {
+    VisningRequest: {
       /**
        * Format: int32
        * @example 1
@@ -266,6 +251,16 @@ export interface components {
       /** @example 100 */
       pris: number;
     };
+    VisningResponse: {
+      /** Format: int32 */
+      visningnr?: number;
+      film?: components["schemas"]["FilmResponse"];
+      kinosal?: components["schemas"]["Kinosal"];
+      /** Format: date */
+      dato?: string;
+      starttid?: components["schemas"]["LocalTime"];
+      pris?: number;
+    };
   };
   responses: never;
   parameters: never;
@@ -284,7 +279,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["Visning"];
+        "application/json": components["schemas"]["VisningRequest"];
       };
     };
     responses: {
@@ -306,7 +301,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": components["schemas"]["Visning"];
+        "application/json": components["schemas"]["VisningRequest"];
       };
     };
     responses: {
@@ -433,27 +428,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": components["schemas"]["Visning"][];
-        };
-      };
-    };
-  };
-  hentTilgjengeligeFilmer: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description successful operation */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["FilmResponse"][];
+          "application/json": components["schemas"]["VisningResponse"][];
         };
       };
     };
