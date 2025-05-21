@@ -61,6 +61,7 @@ export function TilgjengeligeVisninger() {
             <tr>
               <th className="p-2 border">Visningnr</th>
               <th className="p-2 border">Filmnavn</th>
+              <th className="p-2 border">Kinonavn</th>
               <th className="p-2 border">Kinosalnavn</th>
               <th className="p-2 border">Dato</th>
               <th className="p-2 border">Starttid</th>
@@ -73,6 +74,7 @@ export function TilgjengeligeVisninger() {
                 <td className="p-2 border">{visning.visningnr}</td>
                 <td className="p-2 border">{visning.film?.filmnavn}</td>
                 <td className="p-2 border">{visning.kinosal?.kinonavn}</td>
+                <td className="p-2 border">{visning.kinosal?.kinosalnavn}</td>
                 <td className="p-2 border">{visning.dato}</td>
                 <td className="p-2 border">{visning.starttid}</td>
                 <td className="p-2 border">{visning.pris} kr</td>
