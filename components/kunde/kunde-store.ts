@@ -9,6 +9,9 @@ interface StoreState {
 
   plasser: PlassRequest[];
   setPlasser: (arg: PlassRequest[]) => void;
+
+  apiResponse: string | null;
+  setApiResponse: (arg: string | null) => void;
 }
 
 export const useKundeStore = create<StoreState>()((set) => ({
@@ -17,4 +20,7 @@ export const useKundeStore = create<StoreState>()((set) => ({
 
   plasser: [],
   setPlasser: (arg) => set({ plasser: arg }),
+
+  apiResponse: null,
+  setApiResponse: (arg) => set({ apiResponse: arg }),
 }));

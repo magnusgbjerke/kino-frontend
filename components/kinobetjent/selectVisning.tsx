@@ -16,7 +16,7 @@ export type ErrorResponse = components["schemas"]["ErrorResponse"];
 
 export function SelectVisning() {
   const [options, setOptions] = useState<VisningResponse[]>([]);
-  const { visningnr, setVisningnr } = useKinobetjentStore();
+  const { visningnr, setVisningnr, setApiResponse } = useKinobetjentStore();
 
   useEffect(() => {
     async function fetchData() {
@@ -36,6 +36,7 @@ export function SelectVisning() {
   async function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const visningnr = e.target.value;
     setVisningnr(visningnr);
+    setApiResponse(null);
   }
 
   return (

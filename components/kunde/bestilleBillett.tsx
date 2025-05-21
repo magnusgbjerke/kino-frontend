@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "../Button";
 import { components } from "@/lib/schema";
 import { getPath } from "@/lib/dataAdmin";
@@ -20,8 +19,14 @@ export type Billett = components["schemas"]["Billett"];
 export type ErrorResponse = components["schemas"]["ErrorResponse"];
 
 export function BestilleBillett() {
-  const [apiResponse, setApiResponse] = useState<string | null>(null);
-  const { visningnr, plasser, setPlasser, setVisningnr } = useKundeStore();
+  const {
+    visningnr,
+    plasser,
+    setPlasser,
+    setVisningnr,
+    apiResponse,
+    setApiResponse,
+  } = useKundeStore();
 
   const sendToAPI = async () => {
     const payload: RegistrereBillett = {

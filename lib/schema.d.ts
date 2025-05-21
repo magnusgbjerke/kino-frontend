@@ -213,6 +213,7 @@ export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
     Billett: {
+      /** Format: uuid */
       billettkode?: string;
       visning?: components["schemas"]["VisningResponse"];
       erBetalt?: boolean;
