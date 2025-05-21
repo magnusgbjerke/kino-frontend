@@ -38,7 +38,7 @@ export function SelectMenu() {
   }
 
   return (
-    <select value={visningnr} onChange={handleChange}>
+    <select value={visningnr} onChange={handleChange} className="border">
       <option value="" disabled>
         Velg en visning
       </option>

@@ -82,7 +82,9 @@ export function BestilleBillett() {
       <h1 className="text-4xl font-bold mb-6">Bestill Billett</h1>
       <SelectMenu />
       <div>
-        <label className="block mb-2 font-semibold">Registrere Plasser</label>
+        <label className="block pt-4 pb-4 font-semibold">
+          Registrere Plasser
+        </label>
         {registrerePlasser.map((plass, index) => (
           <div key={index} className="flex items-center space-x-4 mb-3">
             <div className="flex-1">
@@ -127,7 +129,7 @@ export function BestilleBillett() {
         </Button>
       </div>
 
-      <p>Generert billett: {apiResponse}</p>
+      <p className="font-bold pt-2">Generert billett: {apiResponse}</p>
     </div>
   );
 }
