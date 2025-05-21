@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Input } from "../Input";
 import { Button } from "../Button";
 import { components } from "@/lib/schema";
-import { getPath } from "@/lib/dataAdmin";
+import { getPath } from "@/lib/data";
 import { useSession } from "next-auth/react";
 
 export type FilmRequest = components["schemas"]["FilmRequest"];

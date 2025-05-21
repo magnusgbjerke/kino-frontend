@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useKinobetjentStore } from "./kinobetjent-store";
-import { getPath } from "@/lib/dataAdmin";
-import { components } from "@/lib/schema";
+import { getPath, PlassRequest, PlassResponse } from "@/lib/data";
 import { Button } from "../Button";
-
-export type PlassRequest = components["schemas"]["PlassRequest"];
-export type PlassResponse = components["schemas"]["PlassResponse"];
 
 export function SelectPlass() {
   const [options, setOptions] = useState<PlassResponse[]>([]);

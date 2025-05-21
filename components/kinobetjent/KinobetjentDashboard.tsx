@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { RegistrereBillett } from "./registrereBillett";
+import { RegistrerBillett } from "./registrerBillett";
 import { RegistrereBetaling } from "./registrereBetaling";
 import { SletteUbetalteBestillinger } from "./sletteUbetalteBestillinger";
 export function KinobetjentDashboard() {
@@ -16,7 +16,7 @@ export function KinobetjentDashboard() {
         <div>
           {" "}
           <RegistrereBetaling />
-          <RegistrereBillett />
+          <RegistrerBillett />
           <SletteUbetalteBestillinger />
         </div>
         <div>
