@@ -129,7 +129,13 @@ export function BestilleBillett() {
         </Button>
       </div>
 
-      <p className="font-bold pt-2">Generert billett: {apiResponse}</p>
+      {apiResponse && (
+        <p className="font-bold pt-2">
+          Generert billett: {apiResponse} <br />
+          Billettene må hentes og betales senest 30 minutter før forestillingen
+          starter, og man må oppgi den viste billettkoden ved henting
+        </p>
+      )}
     </div>
   );
 }
