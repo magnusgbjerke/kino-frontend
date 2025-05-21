@@ -56,7 +56,7 @@ export function RegistrereBetaling() {
         alert(errorData.message);
       }
     } catch (error) {
-      console.error("Failed to send to API:", error?.message || error);
+      console.error("Failed to send to API:", error);
     }
   };
   return (

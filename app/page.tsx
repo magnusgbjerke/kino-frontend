@@ -22,7 +22,7 @@ export default function Home() {
         setRole("KINOBETJENT");
       }
     }
-  }, [session?.accessToken]);
+  }, [session?.accessToken, setRole]);
 
   if (status === "loading") {
     return (

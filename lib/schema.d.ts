@@ -247,6 +247,7 @@ export interface components {
       kinosalnavn?: string;
     };
     LocalTime: {
+      slice(arg0: number, arg1: number): unknown;
       /** Format: int32 */
       hour?: number;
       /** Format: int32 */
@@ -304,7 +305,7 @@ export interface components {
        * @example 2024-02-02
        */
       dato: string;
-      starttid: components["schemas"]["LocalTime"];
+      starttid: string;
       /** @example 100 */
       pris: number;
     };
@@ -314,8 +315,8 @@ export interface components {
       film?: components["schemas"]["FilmResponse"];
       kinosal?: components["schemas"]["Kinosal"];
       /** Format: date */
-      dato?: string;
-      starttid?: components["schemas"]["LocalTime"];
+      dato: string;
+      starttid: string;
       pris?: number;
     };
   };

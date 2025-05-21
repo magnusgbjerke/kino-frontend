@@ -2,10 +2,18 @@
 
 import { jwtDecode } from "jwt-decode";
 
-export const getRolesFromToken = (token) => {
+export interface KeycloakJwtPayload {
+  resource_access?: {
+    [clientId: string]: {
+      roles: string[];
+    };
+  };
+}
+
+export const getRolesFromToken = (token: string) => {
   try {
-    const decoded = jwtDecode(token);
-    return decoded.resource_access["tcs-client"]?.roles || [];
+    const decoded = jwtDecode<KeycloakJwtPayload>(token);
+    return decoded.resource_access?.["kino-client"]?.roles || [];
   } catch (error) {
     return [];
   }

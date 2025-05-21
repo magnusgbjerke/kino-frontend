@@ -1,6 +1,6 @@
-import { components, paths } from "@/lib/schema";
+import { components } from "@/lib/schema";
 
-export function getPath<PathKey extends keyof paths>(path: PathKey): string {
+export function getPath(path: string): string {
   return `${process.env.NEXT_PUBLIC_BACKEND_URL}${path}`;
 }
 //types

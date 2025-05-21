@@ -3,19 +3,8 @@
 import { useState } from "react";
 import { Input } from "../Input";
 import { Button } from "../Button";
-import { components } from "@/lib/schema";
-import { getPath } from "@/lib/data";
+import { ErrorResponse, getPath, VisningRequest } from "@/lib/data";
 import { useSession } from "next-auth/react";
-
-export type FilmRequest = components["schemas"]["FilmRequest"];
-export type FilmResponse = components["schemas"]["FilmResponse"];
-export type LocalTime = components["schemas"]["LocalTime"];
-export type RegistrereBillett = components["schemas"]["RegistrereBillett"];
-export type RegistrerePlasser = components["schemas"]["Plass"];
-export type VisningRequest = components["schemas"]["VisningRequest"];
-export type VisningResponse = components["schemas"]["VisningResponse"];
-export type Billett = components["schemas"]["Billett"];
-export type ErrorResponse = components["schemas"]["ErrorResponse"];
 
 export function RegistrereVisning() {
   const [dato, setDato] = useState("2024-02-02");
@@ -58,7 +47,7 @@ export function RegistrereVisning() {
         alert(errorData.message);
       }
     } catch (error) {
-      console.error("Failed to send to API:", error?.message || error);
+      console.error("Failed to send to API:", error);
     }
   };
 

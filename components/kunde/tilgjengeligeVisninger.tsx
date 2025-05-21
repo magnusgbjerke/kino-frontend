@@ -26,7 +26,7 @@ export function TilgjengeligeVisninger() {
           alert(errorData.message);
         }
       } catch (error) {
-        console.error("Failed to fetch visninger:", error?.message || error);
+        console.error("Failed to fetch visninger:", error);
       }
     }
 

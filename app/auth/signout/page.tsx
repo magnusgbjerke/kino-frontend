@@ -13,7 +13,7 @@ const Page = () => {
     };
     activateSession();
     router.push("/");
-  }, []);
+  }, [router]);
 
   return <div>Redirecting...</div>;
 };
