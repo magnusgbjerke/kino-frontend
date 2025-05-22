@@ -12,7 +12,7 @@ import {
 import { useSession } from "next-auth/react";
 
 export function RegistrereVisning() {
-  const [dato, setDato] = useState("2024-02-02");
+  const [dato, setDato] = useState("2025-07-02");
   const [filmnr, setFilmnr] = useState(1);
   const [kinosalnr, setKinosalnr] = useState(201);
   const [pris, setPris] = useState(100);

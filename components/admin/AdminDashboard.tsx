@@ -5,6 +5,7 @@ import { RegistrereFilm } from "@/components/admin/registrereFilm";
 import { OppdatereVisning } from "./oppdatereVisning";
 import { RegistrereVisning } from "./registrereVisning";
 import { SletteVisning } from "./sletteVisning";
+import { StatistikkVisning } from "./statistikkVisning";
 export function AdminDashboard() {
   const { data: session } = useSession();
 
@@ -18,6 +19,7 @@ export function AdminDashboard() {
           <OppdatereVisning />
           <RegistrereVisning />
           <SletteVisning />
+          <StatistikkVisning />
         </div>
 
         <div>

@@ -14,3 +14,4 @@ export type PlassRequest = components["schemas"]["PlassRequest"];
 export type PlassResponse = components["schemas"]["PlassResponse"];
 export type VisningRequest = components["schemas"]["VisningRequest"];
 export type VisningResponse = components["schemas"]["VisningResponse"];
+export type Statistikk = components["schemas"]["Statistikk"];
