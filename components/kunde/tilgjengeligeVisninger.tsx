@@ -41,6 +41,12 @@ export function TilgjengeligeVisninger() {
     return <div>Ingen tilgjengelige visninger.</div>;
   }
 
+  // Helper to format YYYY-MM-DD → DD.MM.YYYY
+  function formatDate(dateStr: string): string {
+    const [year, month, day] = dateStr.split("-");
+    return `${day}.${month}.${year}`;
+  }
+
   return (
     <div className="p-4">
       <h1 className="text-4xl font-bold mb-6">Tilgjengelige visninger</h1>
@@ -64,7 +70,7 @@ export function TilgjengeligeVisninger() {
                 <td className="p-2 border">{visning.film?.filmnavn}</td>
                 <td className="p-2 border">{visning.kinosal?.kinonavn}</td>
                 <td className="p-2 border">{visning.kinosal?.kinosalnavn}</td>
-                <td className="p-2 border">{visning.dato}</td>
+                <td className="p-2 border">{formatDate(visning.dato)}</td>
                 <td className="p-2 border">{visning.starttid}</td>
                 <td className="p-2 border">{visning.pris} kr</td>
               </tr>

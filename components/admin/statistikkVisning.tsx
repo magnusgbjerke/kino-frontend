@@ -1,14 +1,27 @@
 "use client";
 
 import { getPath, Statistikk } from "@/lib/data";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export function StatistikkVisning() {
   const [data, setData] = useState<Statistikk>();
+  const { data: session } = useSession();
   useEffect(() => {
     async function fetchData() {
+      if (!session?.accessToken) {
+        console.error("No access token. User might not be logged in.");
+        return;
+      }
       try {
-        const res = await fetch(`${getPath("/api/administrasjon/statistikk")}`);
+        const res = await fetch(getPath("/api/administrasjon/statistikk"), {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session.accessToken}`,
+          },
+        });
+
         const data: Statistikk = await res.json();
         setData(data);
       } catch (err) {
