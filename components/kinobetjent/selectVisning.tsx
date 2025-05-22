@@ -10,7 +10,7 @@ export function SelectVisning() {
     async function fetchData() {
       try {
         const res = await fetch(`
-            ${getPath("/api/kinobetjent/visning")}`);
+            ${getPath("/api/kunde/visning")}`);
         const data = await res.json();
         setOptions(data);
       } catch (err) {
