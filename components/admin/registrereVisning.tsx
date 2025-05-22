@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { Input } from "../Input";
 import { Button } from "../Button";
-import { ErrorResponse, getPath, VisningRequest } from "@/lib/data";
+import {
+  ErrorResponse,
+  getPath,
+  VisningRequest,
+  VisningResponse,
+} from "@/lib/data";
 import { useSession } from "next-auth/react";
 
 export function RegistrereVisning() {
@@ -12,7 +17,7 @@ export function RegistrereVisning() {
   const [kinosalnr, setKinosalnr] = useState(201);
   const [pris, setPris] = useState(100);
   const [starttid, setStarttid] = useState("16:00:00");
-  const [visningnr, setVisningnr] = useState(1);
+  const [visningnr] = useState(1);
   const { data: session } = useSession();
 
   const sendToAPI = async () => {
@@ -41,7 +46,8 @@ export function RegistrereVisning() {
       });
 
       if (response.ok) {
-        alert(`Visning ${visningnr} er registrert`);
+        const data: VisningResponse = await response.json();
+        alert(`Visning ${data.visningnr} er registrert`);
       } else {
         const errorData: ErrorResponse = await response.json();
         alert(errorData.message);
@@ -54,14 +60,6 @@ export function RegistrereVisning() {
   return (
     <div className="p-4">
       <h1 className="text-4xl font-bold mb-6">Registrere visning</h1>
-
-      <div>
-        <label className="block mb-1 font-medium">Visningsnummer</label>
-        <Input
-          value={String(visningnr)}
-          onChange={(e) => setVisningnr(Number(e.target.value))}
-        />
-      </div>
 
       <div>
         <label className="block mb-1 font-medium">Filmnummer</label>

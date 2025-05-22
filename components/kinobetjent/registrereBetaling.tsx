@@ -76,7 +76,7 @@ export function RegistrereBetaling() {
 
       <div className="pt-4">
         <Button size="sm" onClick={sendToAPI}>
-          Registrer
+          Registrer betaling
         </Button>
       </div>
     </div>

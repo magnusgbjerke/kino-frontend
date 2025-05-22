@@ -24,7 +24,7 @@ export function BestilleBillett() {
 
     try {
       console.log(JSON.stringify(payload));
-      const response = await fetch(getPath("/api/kinobetjent/billett"), {
+      const response = await fetch(getPath("/api/kunde/billett"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

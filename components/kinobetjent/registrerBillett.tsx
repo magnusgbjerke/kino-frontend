@@ -53,7 +53,7 @@ export function RegistrerBillett() {
 
   return (
     <div className="p-4">
-      <h1 className="text-4xl font-bold mb-6">Bestill Billett</h1>
+      <h1 className="text-4xl font-bold mb-6">Registrer Billett</h1>
       <SelectVisning />
       {visningnr && <SelectPlass />}
       {visningnr && (

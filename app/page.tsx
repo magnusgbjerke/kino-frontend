@@ -20,6 +20,8 @@ export default function Home() {
         setRole("ADMIN");
       } else if (roles?.includes("KINOBETJENT")) {
         setRole("KINOBETJENT");
+      } else if (roles?.includes("USER")) {
+        setRole("USER");
       }
     }
   }, [session?.accessToken, setRole]);
@@ -40,6 +42,7 @@ export default function Home() {
         <div>
           {role === "ADMIN" && <AdminDashboard />}
           {role === "KINOBETJENT" && <KinobetjentDashboard />}
+          {role === "USER" && <Kunde />}
         </div>
       )}
     </div>
